@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
       ),
       subtitle:
         "We handle legally binding lease agreements, strict background screening, and direct banking to landlords' accounts by the 10th of every month with full financial accountability.",
-      image: '/modern_villa.jpg',
+      image: '/modern.jpeg',
     },
     {
       tag: 'In-House Maintenance & 24/7 Support',
@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ setView }) => {
       ),
       subtitle:
         'Our in-house technical caretaker teams supervise utility controls, emergency plumbers, and routine audits. We also provide complimentary professional building cleaning and pest control.',
-      image: '/luxury_apartment.jpg',
+      image: '/luxury.jpeg',
     },
   ];
 
