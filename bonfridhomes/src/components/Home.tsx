@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
             {/* Left Image Column */}
             <div style={{ position: 'relative' }}>
               <img
-                src={`${import.meta.env.BASE_URL}suburban_townhouse.jpg`}
+                src={`${import.meta.env.BASE_URL}HERO.jpeg`}
                 alt="Bonifrid Homes Suburban Management"
                 style={{
                   width: '100%',
