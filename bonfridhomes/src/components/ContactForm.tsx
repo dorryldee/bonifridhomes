@@ -4,7 +4,7 @@ const ContactForm: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [role, setRole] = useState('Property Owner / Landlord');
+  const [role, setRole] = useState('Property Owner');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 

@@ -37,7 +37,7 @@ const ContactQuickBar: React.FC = () => {
             </div>
             <div>
               <span className="quickbar-label">Email Us</span>
-              <a href="mailto:info@bonifridhomes.com" className="quickbar-link">info@bonifridhomes.com</a>
+              <a href="mailto:dorrylmbula2022@gmail.com" className="quickbar-link">dorrylmbula2022@gmail.com</a>
             </div>
           </div>
 
