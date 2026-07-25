@@ -7,9 +7,11 @@ const ContactForm: React.FC = () => {
   const [role, setRole] = useState('Property Owner');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
     try {
       const response = await fetch('/api/inquiries', {
         method: 'POST',
@@ -21,6 +23,9 @@ const ContactForm: React.FC = () => {
           message: `[Role: ${role}] ${message}`
         })
       });
+      
+      const data = await response.json();
+      
       if (response.ok) {
         setSubmitted(true);
         setName('');
@@ -28,9 +33,12 @@ const ContactForm: React.FC = () => {
         setPhone('');
         setMessage('');
         setTimeout(() => setSubmitted(false), 4000);
+      } else {
+        setSubmitError(data.error || 'Failed to submit. Server returned an error.');
       }
     } catch (err) {
       console.error('Error submitting contact inquiry:', err);
+      setSubmitError('Unable to connect to the backend server. Please verify that the backend is running on port 5000.');
     }
   };
 
@@ -68,6 +76,23 @@ const ContactForm: React.FC = () => {
             <h3 style={{ fontSize: '1.4rem', color: 'var(--color-primary)', marginBottom: '24px', fontWeight: 600 }}>
               Inquiry Request
             </h3>
+
+            {submitError && (
+              <div
+                style={{
+                  backgroundColor: 'rgba(184, 44, 60, 0.08)',
+                  color: 'var(--color-accent)',
+                  padding: '14px 18px',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: '0.88rem',
+                  marginBottom: '20px',
+                  border: '1px solid rgba(184, 44, 60, 0.2)',
+                  lineHeight: '1.4'
+                }}
+              >
+                {submitError}
+              </div>
+            )}
             
             {submitted ? (
               <div

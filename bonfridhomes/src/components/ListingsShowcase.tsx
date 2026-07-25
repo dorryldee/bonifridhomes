@@ -61,6 +61,7 @@ const ListingsShowcase: React.FC = () => {
   const [maxPrice, setMaxPrice] = useState<number>(300000);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [inquirySuccess, setInquirySuccess] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   // Inquiry form states
   const [inqName, setInqName] = useState('');
@@ -75,6 +76,7 @@ const ListingsShowcase: React.FC = () => {
 
   const handleInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
     try {
       const response = await fetch('/api/inquiries', {
         method: 'POST',
@@ -86,6 +88,9 @@ const ListingsShowcase: React.FC = () => {
           message: `Inquiry regarding property listing: ${selectedProperty?.title} (${selectedProperty?.location})`
         })
       });
+      
+      const data = await response.json();
+      
       if (response.ok) {
         setInquirySuccess(true);
         setInqName('');
@@ -95,9 +100,12 @@ const ListingsShowcase: React.FC = () => {
           setInquirySuccess(false);
           setSelectedProperty(null);
         }, 4000);
+      } else {
+        setSubmitError(data.error || 'Failed to submit. Server returned an error.');
       }
     } catch (err) {
       console.error('Error submitting client inquiry:', err);
+      setSubmitError('Unable to connect to backend server. Please verify the backend is running.');
     }
   };
 
@@ -345,6 +353,11 @@ const ListingsShowcase: React.FC = () => {
                 {/* Inquiry Form */}
                 <div style={{ backgroundColor: 'var(--color-bg-alt)', padding: '24px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                   <h4 style={{ color: 'var(--color-primary)', marginBottom: '15px' }}>Inquire About This Space</h4>
+                  {submitError && (
+                    <div style={{ backgroundColor: 'rgba(184, 44, 60, 0.08)', color: 'var(--color-accent)', padding: '10px 14px', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', marginBottom: '15px', border: '1px solid rgba(184, 44, 60, 0.2)', gridColumn: '1 / -1' }}>
+                      {submitError}
+                    </div>
+                  )}
                   {inquirySuccess ? (
                     <div style={{ color: 'green', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
