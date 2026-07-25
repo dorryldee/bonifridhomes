@@ -1,6 +1,9 @@
 {
   "name": "bonfridhomes-backend",
   "version": "1.0.0",
+  "engines": {
+  "node": "20.x"
+},
   "description": "Contact-only Backend API with Email Forwarding for Bonifrid Homes",
   "main": "dist/server.js",
   "scripts": {
